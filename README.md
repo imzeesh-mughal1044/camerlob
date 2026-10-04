@@ -85,4 +85,4 @@ Please do not report vulnerabilities in public issues. See
 
 ## License
 
-[MIT](LICENSE) © 2025 Camerlob Contributors
+[MIT](LICENSE) © 2026 Zeeshan Ahmad / ZEFANEX Technologies
