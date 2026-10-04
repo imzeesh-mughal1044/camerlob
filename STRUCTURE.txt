@@ -1,0 +1,195 @@
+Root: F:\Camerlob
+Generated: Fri Oct 02 2026
+Folders count: 36, Files count: 153
+Excluded: node_modules/, .next/, .git/, .turbo/, .vercel/, .husky/, coverage/, playwright-report/, test-results/, .env.local, .archive/
+
+.github/
+   ISSUE_TEMPLATE/
+      bug_report.md
+      config.yml
+      feature_request.md
+   workflows/
+      ci.yml
+      codeql.yml
+      release.yml
+   dependabot.yml
+   FUNDING.yml
+   PULL_REQUEST_TEMPLATE.md
+.vscode/
+   extensions.json
+   launch.json
+   settings.json
+app/
+   (shell)/
+      convert/
+         loading.tsx
+         page.tsx
+      result/
+         loading.tsx
+         page.tsx
+      layout.tsx
+      page.tsx
+   api/
+      convert/
+         route.ts
+      formats/
+         [format]/
+            route.ts
+         route.ts
+      health/
+         route.ts
+   error.tsx
+   globals.css
+   layout.tsx
+   loading.tsx
+   not-found.tsx
+components/
+   camerlob/
+      AnimatedBackground.tsx
+      ApertureVisual.tsx
+      ConvertActionBar.tsx
+      EmptyState.tsx
+      EngineStatusPanel.tsx
+      FailedFilesList.tsx
+      FileCard.tsx
+      FileCounter.tsx
+      FileQueue.tsx
+      Footer.tsx
+      FormatCard.tsx
+      FormatGrid.tsx
+      FormatPicker.tsx
+      FormatSwapButton.tsx
+      HeroCTA.tsx
+      Logo.tsx
+      Navbar.tsx
+      PageTransition.tsx
+      ResultCard.tsx
+      ResultGrid.tsx
+      ResultStats.tsx
+      StepIndicator.tsx
+      StepRow.tsx
+      TerminalWindow.tsx
+      ThemeToggle.tsx
+      UploadZone.tsx
+   icons/
+      .gitkeep
+   ui/
+      button.tsx
+Documents/
+   API-REFERENCE.md
+   BACKEND-ARCHITECTURE.md
+   ENGINE-INSTALL.md
+   ERROR-CODES.md
+   FOLDER-ARCHITECTURE.md
+   FORMAT-MATRIX.md
+   MANUAL-INSTALL.md
+   PRD.md
+   TRD.md
+   UI-UX-BRIEF.md
+hooks/
+   useConversion.ts
+   useEngineStatus.ts
+   useFileQueue.ts
+   useFormatMatrix.ts
+   useZipDownload.ts
+lib/
+   constants/
+      env.ts
+      errors.ts
+      formats.ts
+      limits.ts
+      messages.ts
+      site.ts
+   convert/
+      engines/
+         detect.ts
+         ghostscript.ts
+         imagemagick.ts
+         libraw.ts
+         sharp.ts
+         spawn.ts
+      canvas.ts
+      client-converter.ts
+      formats.ts
+      heic.ts
+      router.ts
+      server-converter.ts
+   utils/
+      api-response.ts
+      cn.ts
+      detect-client-format.ts
+      download.ts
+      file-size.ts
+      magic-bytes.ts
+      mime.ts
+      sanitize-filename.ts
+      temp-files.ts
+      zip.ts
+   validation/
+      convert.ts
+public/
+   wasm/
+      .gitkeep
+   Camerlob_fav.png
+   Camerlob_icon.png
+   CAMERLOB_nav.png
+scripts/
+   audit-matrix.ts
+   check-engines.ts
+store/
+   conversionStore.ts
+styles/
+   animations.css
+   globals.css
+   scrollbar.css
+   tokens.css
+tests/
+   e2e/
+      .gitkeep
+   fixtures/
+      .gitkeep
+   integration/
+      .gitkeep
+   unit/
+      .gitkeep
+types/
+   api.ts
+   conversion.ts
+   engine.ts
+   error.ts
+   file.ts
+   format.ts
+   index.ts
+   store.ts
+.dockerignore
+.editorconfig
+.env.example
+.eslintignore
+.eslintrc.json
+.gitattributes
+.gitignore
+.nvmrc
+.prettierignore
+.prettierrc
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+components.json
+CONTRIBUTING.md
+docker-compose.yml
+Dockerfile
+LICENSE
+next-env.d.ts
+next.config.mjs
+package.json
+playwright.config.ts
+pnpm-lock.yaml
+postcss.config.mjs
+README.md
+SECURITY.md
+STRUCTURE.txt
+tailwind.config.ts
+tsconfig.json
+vercel.json
+vitest.config.ts
+
+END OF STRUCTURE

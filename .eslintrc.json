@@ -1,0 +1,27 @@
+{
+  "root": true,
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "eqeqeq": ["error", "smart"],
+    "prefer-const": "error"
+  },
+  "overrides": [
+    {
+      "files": ["scripts/**/*.ts", "tests/**/*.ts", "tests/**/*.tsx"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ],
+  "ignorePatterns": [
+    "node_modules/",
+    ".next/",
+    "out/",
+    "build/",
+    "dist/",
+    "coverage/",
+    "public/wasm/",
+    "next-env.d.ts"
+  ]
+}

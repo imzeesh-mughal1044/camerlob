@@ -1,0 +1,327 @@
+/*
+ * styles/tokens.css
+ * Every Deep Aqua design token, transcribed from Documents/UI-UX-BRIEF.md
+ * section 16. This file is the single source of truth for colour, radius,
+ * elevation, gradient, typography and motion values.
+ *
+ * Each colour is published in two forms:
+ *   --color-<name>       hex, for direct use in component CSS
+ *   --color-<name>-ch    space-separated RGB channels, consumed by Tailwind
+ *                        through rgb(var(--token-ch) / <alpha-value>) so that
+ *                        opacity modifiers such as bg-aqua-500/10 resolve.
+ *
+ * No component may hardcode a hex value. Add the token here first, then map it
+ * in tailwind.config.ts.
+ */
+
+:root {
+  /* ---- Color: Black scale ---- */
+  --color-black-0: #ffffff;
+  --color-black-50: #f5f7f8;
+  --color-black-100: #e4e7e9;
+  --color-black-200: #c7cdd1;
+  --color-black-300: #a1a9af;
+  --color-black-400: #6b7378;
+  --color-black-500: #4a5155;
+  --color-black-600: #2e3336;
+  --color-black-700: #1c2022;
+  --color-black-800: #121416;
+  --color-black-900: #0a0b0c;
+  --color-black-950: #050506;
+
+  --color-black-0-ch: 255 255 255;
+  --color-black-50-ch: 245 247 248;
+  --color-black-100-ch: 228 231 233;
+  --color-black-200-ch: 199 205 209;
+  --color-black-300-ch: 161 169 175;
+  --color-black-400-ch: 107 115 120;
+  --color-black-500-ch: 74 81 85;
+  --color-black-600-ch: 46 51 54;
+  --color-black-700-ch: 28 32 34;
+  --color-black-800-ch: 18 20 22;
+  --color-black-900-ch: 10 11 12;
+  --color-black-950-ch: 5 5 6;
+
+  /* ---- Color: Aqua scale ---- */
+  --color-aqua-50: #e0fcff;
+  --color-aqua-100: #b8f8ff;
+  --color-aqua-200: #7ff0ff;
+  --color-aqua-300: #3de5ff;
+  --color-aqua-400: #00d9f5;
+  --color-aqua-500: #00e5ff;
+  --color-aqua-600: #00b8cc;
+  --color-aqua-700: #008a99;
+  --color-aqua-800: #005c66;
+  --color-aqua-900: #002e33;
+
+  --color-aqua-50-ch: 224 252 255;
+  --color-aqua-100-ch: 184 248 255;
+  --color-aqua-200-ch: 127 240 255;
+  --color-aqua-300-ch: 61 229 255;
+  --color-aqua-400-ch: 0 217 245;
+  --color-aqua-500-ch: 0 229 255;
+  --color-aqua-600-ch: 0 184 204;
+  --color-aqua-700-ch: 0 138 153;
+  --color-aqua-800-ch: 0 92 102;
+  --color-aqua-900-ch: 0 46 51;
+
+  /* ---- Color: Semantic ---- */
+  --color-success: #00e5a0;
+  --color-success-hover: #00c98a;
+  --color-warning: #ffb020;
+  --color-warning-hover: #e69a0a;
+  --color-error: #ff5c5c;
+  --color-error-hover: #e64a4a;
+  --color-info: #38bdf8;
+  --color-info-hover: #1ba5e0;
+  --color-cyan: #3ec5de;
+  --color-cyan-hover: #62d6ec;
+
+  --color-success-ch: 0 229 160;
+  --color-success-hover-ch: 0 201 138;
+  --color-warning-ch: 255 176 32;
+  --color-warning-hover-ch: 230 154 10;
+  --color-error-ch: 255 92 92;
+  --color-error-hover-ch: 230 74 74;
+  --color-info-ch: 56 189 248;
+  --color-info-hover-ch: 27 165 224;
+  --color-cyan-ch: 62 197 222;
+  --color-cyan-hover-ch: 98 214 236;
+
+  /* ---- Color: Surfaces (hex, then channels) ---- */
+  --color-bg-primary: var(--color-black-900);
+  --color-bg-secondary: var(--color-black-800);
+  --color-bg-tertiary: var(--color-black-700);
+  --color-bg-elevated: var(--color-black-600);
+  --color-bg-overlay: var(--color-black-950);
+  --color-bg-primary-ch: var(--color-black-900-ch);
+  --color-bg-secondary-ch: var(--color-black-800-ch);
+  --color-bg-tertiary-ch: var(--color-black-700-ch);
+  --color-bg-elevated-ch: var(--color-black-600-ch);
+  --color-bg-overlay-ch: var(--color-black-950-ch);
+
+  /* ---- Color: Borders ---- */
+  --color-border-subtle: var(--color-black-700);
+  --color-border-default: var(--color-black-600);
+  --color-border-muted: var(--color-black-500);
+  --color-border-strong: var(--color-aqua-500);
+  --color-border-subtle-ch: var(--color-black-700-ch);
+  --color-border-default-ch: var(--color-black-600-ch);
+  --color-border-muted-ch: var(--color-black-500-ch);
+  --color-border-strong-ch: var(--color-aqua-500-ch);
+
+  /* ---- Color: Text ---- */
+  --color-text-primary: var(--color-black-50);
+  --color-text-secondary: var(--color-black-300);
+  --color-text-tertiary: #7b858b;
+  --color-text-disabled: var(--color-black-500);
+  --color-text-on-accent: var(--color-black-900);
+  --color-text-primary-ch: var(--color-black-50-ch);
+  --color-text-secondary-ch: var(--color-black-300-ch);
+  --color-text-tertiary-ch: 123 133 139;
+  --color-text-disabled-ch: var(--color-black-500-ch);
+  --color-text-on-accent-ch: var(--color-black-900-ch);
+
+  /* ---- Color: Accents ---- */
+  --color-aqua-primary: var(--color-aqua-500);
+  --color-aqua-hover: var(--color-aqua-300);
+  --color-aqua-active: var(--color-aqua-600);
+  --color-aqua-muted: var(--color-aqua-900);
+  --color-aqua-glow: rgba(0, 229, 255, 1);
+  --color-aqua-primary-ch: var(--color-aqua-500-ch);
+  --color-aqua-hover-ch: var(--color-aqua-300-ch);
+  --color-aqua-active-ch: var(--color-aqua-600-ch);
+  --color-aqua-muted-ch: var(--color-aqua-900-ch);
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-18: 4.5rem;
+  --space-20: 5rem;
+  --space-22: 5.5rem;
+  --space-24: 6rem;
+  --space-30: 7.5rem;
+  --space-32: 8rem;
+
+  /* ---- Containers ---- */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --grid-gutter: 1.5rem;
+  --grid-columns: 12;
+
+  /* ---- Radius ---- */
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ---- Elevation ---- */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.45), 0 2px 4px -2px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 24px -6px rgba(0, 0, 0, 0.5), 0 4px 8px -4px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 24px 48px -12px rgba(0, 0, 0, 0.6), 0 8px 16px -8px rgba(0, 0, 0, 0.45);
+
+  /* ---- Glow ---- */
+  --glow-sm: 0 0 0 1px rgba(0, 229, 255, 0.3), 0 0 8px rgba(0, 229, 255, 0.25);
+  --glow-md: 0 0 0 1px rgba(0, 229, 255, 0.4), 0 0 16px rgba(0, 229, 255, 0.35),
+    0 0 32px rgba(0, 229, 255, 0.2);
+  --glow-lg: 0 0 0 1px rgba(0, 229, 255, 0.5), 0 0 32px rgba(0, 229, 255, 0.45),
+    0 0 64px rgba(0, 229, 255, 0.25);
+  --shadow-inset: inset 0 2px 4px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  --shadow-card-hover: 0 12px 24px -8px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0, 229, 255, 0.2);
+  --focus-ring: 0 0 0 2px rgba(0, 229, 255, 0.55);
+
+  /* ---- Gradients ---- */
+  --gradient-aqua: linear-gradient(135deg, #00e5ff 0%, #00b8cc 100%);
+  --gradient-aqua-hover: linear-gradient(135deg, #3de5ff 0%, #00d9f5 100%);
+  --gradient-aqua-glow: radial-gradient(
+    ellipse 60% 50% at 50% 40%,
+    rgba(0, 229, 255, 0.18) 0%,
+    rgba(0, 229, 255, 0.06) 45%,
+    rgba(10, 11, 12, 0) 100%
+  );
+  --gradient-card-hover: linear-gradient(
+    180deg,
+    rgba(0, 229, 255, 0.06) 0%,
+    rgba(0, 229, 255, 0.02) 100%
+  );
+  --gradient-progress: linear-gradient(90deg, #00b8cc 0%, #00e5ff 60%, #7ff0ff 100%);
+
+  /* ---- Typography ---- */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --text-display: 4rem;
+  --lh-display: 1.05;
+  --ls-display: -0.03em;
+  --text-h1: 3rem;
+  --lh-h1: 1.1;
+  --ls-h1: -0.02em;
+  --text-h2: 2.25rem;
+  --lh-h2: 1.2;
+  --ls-h2: -0.02em;
+  --text-h3: 1.75rem;
+  --lh-h3: 1.3;
+  --ls-h3: -0.01em;
+  --text-h4: 1.375rem;
+  --lh-h4: 1.4;
+  --ls-h4: -0.01em;
+  --text-body-lg: 1.125rem;
+  --lh-body-lg: 1.6;
+  --text-body: 1rem;
+  --lh-body: 1.6;
+  --text-body-sm: 0.875rem;
+  --lh-body-sm: 1.5;
+  --text-caption: 0.75rem;
+  --lh-caption: 1.4;
+  --ls-caption: 0.02em;
+  --text-button: 0.875rem;
+  --lh-button: 1;
+  --ls-button: 0.01em;
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-instant: 100ms;
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 500ms;
+  --transition-fast: 150ms var(--ease-in-out);
+  --transition-base: 200ms var(--ease-out);
+  --transition-slow: 300ms var(--ease-out);
+
+  /* ---- Layout ---- */
+  --nav-height: 64px;
+  --page-pad-mobile: 1rem;
+  --page-pad-tablet: 1.5rem;
+  --page-pad-desktop: 2.5rem;
+  --toast-width: 360px;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+/*
+ * Light mode overrides surfaces, borders, text and the semantic hues only.
+ * The aqua and black scales stay fixed so brand colour never shifts hue.
+ */
+.light {
+  color-scheme: light;
+
+  --color-bg-primary: #f5f7f8;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #e4e7e9;
+  --color-bg-elevated: #ffffff;
+  --color-bg-overlay: #4a5155;
+  --color-bg-primary-ch: 245 247 248;
+  --color-bg-secondary-ch: 255 255 255;
+  --color-bg-tertiary-ch: 228 231 233;
+  --color-bg-elevated-ch: 255 255 255;
+  --color-bg-overlay-ch: 74 81 85;
+
+  --color-border-subtle: #e4e7e9;
+  --color-border-default: #c7cdd1;
+  --color-border-muted: #e4e7e9;
+  --color-border-strong: #008a99;
+  --color-border-subtle-ch: 228 231 233;
+  --color-border-default-ch: 199 205 209;
+  --color-border-muted-ch: 228 231 233;
+  --color-border-strong-ch: 0 138 153;
+
+  --color-text-primary: #0a0b0c;
+  --color-text-secondary: #2e3336;
+  --color-text-tertiary: #4a5155;
+  --color-text-disabled: #a1a9af;
+  --color-text-primary-ch: 10 11 12;
+  --color-text-secondary-ch: 46 51 54;
+  --color-text-tertiary-ch: 74 81 85;
+  --color-text-disabled-ch: 161 169 175;
+
+  --color-aqua-primary: #005c66;
+  --color-aqua-hover: #002e33;
+  --color-aqua-active: #008a99;
+  --color-aqua-muted: #e0fcff;
+  --color-cyan: #006d80;
+  --color-aqua-primary-ch: 0 92 102;
+  --color-aqua-hover-ch: 0 46 51;
+  --color-aqua-active-ch: 0 138 153;
+  --color-aqua-muted-ch: 224 252 255;
+  --color-cyan-ch: 0 109 128;
+
+  --color-success: #00875e;
+  --color-success-hover: #006b4a;
+  --color-warning: #8a5a00;
+  --color-warning-hover: #6b4600;
+  --color-error: #c23232;
+  --color-error-hover: #a02727;
+  --color-info: #0369a1;
+  --color-info-hover: #1ba5e0;
+  --color-success-ch: 0 135 94;
+  --color-success-hover-ch: 0 107 74;
+  --color-warning-ch: 138 90 0;
+  --color-warning-hover-ch: 107 70 0;
+  --color-error-ch: 194 50 50;
+  --color-error-hover-ch: 160 39 39;
+  --color-info-ch: 3 105 161;
+  --color-info-hover-ch: 27 165 224;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 24px -6px rgba(0, 0, 0, 0.12), 0 4px 8px -4px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 24px 48px -12px rgba(0, 0, 0, 0.16), 0 8px 16px -8px rgba(0, 0, 0, 0.1);
+}

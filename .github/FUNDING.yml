@@ -1,0 +1,11 @@
+# Funding metadata for the GitHub Sponsors button.
+#
+# Uncomment and fill in the platforms you actually use. Leaving this file empty
+# and valid is intentional: an empty mapping simply hides the Sponsor button,
+# which is preferable to pointing contributors at a dormant account.
+#
+# github: [username]
+# ko_fi: username
+# patreon: username
+# open_collective: camerlob
+# custom: ['https://example.com/sponsor']

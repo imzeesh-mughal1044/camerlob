@@ -1,0 +1,323 @@
+/*
+ * styles/animations.css
+ * Keyframes for Camerlob, transcribed from Documents/UI-UX-BRIEF.md section 9.
+ * Every animation respects prefers-reduced-motion via the global block in
+ * styles/globals.css, which forces animation and transition duration to 0.01ms.
+ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes pulseAqua {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4);
+  }
+  50% {
+    opacity: 0.85;
+    box-shadow: 0 0 0 8px rgba(0, 229, 255, 0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Draw-on checkmark used by the result summary. */
+@keyframes drawCheck {
+  from {
+    stroke-dashoffset: 48;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Indeterminate progress shimmer. */
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+/* Slow drift for the hero gradient glow. */
+@keyframes gradientShift {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.28;
+    transform: scale(1.06);
+  }
+}
+
+/* Applied utility classes. */
+.animate-fade-in {
+  animation: fadeIn var(--duration-normal) var(--ease-out) both;
+}
+
+.animate-slide-up {
+  animation: slideUp var(--duration-slow) var(--ease-out) both;
+}
+
+.animate-pulse-aqua {
+  animation: pulseAqua 2s var(--ease-in-out) infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 900ms linear infinite;
+}
+
+.animate-gradient-shift {
+  animation: gradientShift 8s var(--ease-in-out) infinite;
+}
+
+.check-path {
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: drawCheck var(--duration-slower) var(--ease-out) forwards;
+}
+
+.shimmer-track {
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 229, 255, 0) 0%,
+    rgba(0, 229, 255, 0.35) 50%,
+    rgba(0, 229, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* ---------------------------------------------------------------------------
+ * Landing page keyframes.
+ * Transcribed from the marketing spec, section "ANIMATED BACKGROUND" and
+ * "MICRO-INTERACTIONS". All of them animate only `transform`, `opacity` or
+ * colour so they stay on the compositor, and all of them are neutralised by the
+ * prefers-reduced-motion block in styles/globals.css.
+ * ------------------------------------------------------------------------- */
+
+/* Six aperture blades completing one full revolution every 60s. */
+@keyframes apertureRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Starfield drift: diagonal parallax, wrapping via translate3d. */
+@keyframes driftStars {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-24px, 24px, 0);
+  }
+}
+
+/* The hero's soft radial glow breathing between 1 and 1.05. */
+@keyframes glowBreathe {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.18;
+    transform: scale(1.05);
+  }
+}
+
+/* The scroll hint chevron: a short, calm bounce. */
+@keyframes scrollHint {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 6px, 0);
+  }
+}
+
+/* Scroll-triggered fade-up used by every section. */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-aperture-rotate {
+  animation: apertureRotate 60s linear infinite;
+  will-change: transform;
+}
+
+.animate-drift-stars {
+  animation: driftStars 6s linear infinite alternate;
+  will-change: transform;
+}
+
+.animate-glow-breathe {
+  animation: glowBreathe 6s var(--ease-in-out) infinite;
+  will-change: transform, opacity;
+}
+
+.animate-scroll-hint {
+  animation: scrollHint 2s var(--ease-in-out) infinite;
+}
+
+.animate-fade-up {
+  animation: fadeUp var(--duration-slower) var(--ease-out) both;
+}
+
+/* ---------------------------------------------------------------------------
+ * Converter, result and status-screen keyframes.
+ *
+ * Every utility below animates only `transform`, `opacity` or `background-position`
+ * so it stays on the compositor, and every one is neutralised by the
+ * prefers-reduced-motion block in app/globals.css.
+ * ------------------------------------------------------------------------- */
+
+/* Skeleton sweep for the route-level loading screens. Reuses the `shimmer`
+   keyframe above; the sweep travels the full width twice over, so the highlight
+   enters from the left, crosses, and exits right before repeating. */
+.shimmer {
+  background-color: rgb(var(--color-bg-secondary-ch) / 0.7);
+  background-image: linear-gradient(
+    90deg,
+    rgb(var(--color-aqua-500-ch) / 0) 0%,
+    rgb(var(--color-aqua-500-ch) / 0.09) 50%,
+    rgb(var(--color-aqua-500-ch) / 0) 100%
+  );
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 1.8s linear infinite;
+}
+
+/* The three-dot "typing" pulse. 900ms cycle with 300ms steps reads as a
+   travelling light rather than three dots blinking in unison. Delays are applied
+   by nth-child because the markup only ever contains three of these. */
+@keyframes dotPulse {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translate3d(0, 0, 0);
+  }
+  40% {
+    opacity: 1;
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+.dot-pulse {
+  animation: dotPulse 900ms var(--ease-in-out) infinite;
+}
+
+.dot-pulse:nth-child(2) {
+  animation-delay: 300ms;
+}
+
+.dot-pulse:nth-child(3) {
+  animation-delay: 600ms;
+}
+
+/* One-shot arrival for the root loading screen. A single fade on the whole block
+   keeps the aperture and its caption together as one object, rather than
+   staggering apart. */
+.loading-fade-in {
+  animation: fadeIn 200ms var(--ease-out) both;
+}
+
+/* ---------------------------------------------------------------------------
+ * Aperture rotation, one family, four speeds.
+ *
+ * The same keyframe is reused for all of them and only the duration differs, so
+ * the four screens share an identical motion signature and read as one system.
+ * The scale steps are deliberately wide (2s / 2.6s / 3.2s / 40s) rather than
+ * smoothly interpolated: a loading screen and a 404 that rotate at 2.1s and 2.2s
+ * would look like the same component pasted twice.
+ * ------------------------------------------------------------------------- */
+
+/* 2s, ease-in-out: the root loading screen. Fast enough to read as active. */
+.aperture-spin {
+  animation: apertureRotate 2s var(--ease-in-out) infinite;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* 2.6s: /convert's route-level fallback. */
+.aperture-spin-slow {
+  animation: apertureRotate 2.6s var(--ease-in-out) infinite;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* 3.2s: /result's route-level fallback. A destination settling, not working. */
+.aperture-spin-slower {
+  animation: apertureRotate 3.2s var(--ease-in-out) infinite;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* 40s: the 404's corner glyph. A dead page should feel dead — this is slow
+   enough that a visitor does not consciously notice it and fast enough that the
+   shape is unmistakably alive if they are watching. */
+.aperture-spin-slowest {
+  animation: apertureRotate 40s linear infinite;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}

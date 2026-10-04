@@ -1,0 +1,70 @@
+# ---- Node ----
+node_modules/
+.pnpm-store/
+
+# ---- Next.js ----
+.next/
+out/
+next-env.d.ts
+.vercel/
+
+# ---- Build output ----
+build/
+dist/
+.turbo/
+*.tsbuildinfo
+
+# ---- Environment ----
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# ---- Native engine temp workspace (server-side conversion) ----
+/tmp/camerlob/
+tmp/
+.camerlob-tmp/
+
+# ---- Husky generated hooks ----
+.husky/_/
+
+# ---- Test output ----
+coverage/
+playwright-report/
+test-results/
+blob-report/
+.playwright/
+
+# ---- Logs ----
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---- Editors ----
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+
+# ---- OS ----
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ---- Misc ----
+*.pem
+.cache/
+.archive/

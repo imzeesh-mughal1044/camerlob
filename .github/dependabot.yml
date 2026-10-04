@@ -1,0 +1,78 @@
+version: 2
+
+updates:
+  # Runtime and build dependencies, grouped so review stays manageable.
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Etc/UTC
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - pnpm
+    commit-message:
+      prefix: 'chore(deps)'
+    groups:
+      next:
+        patterns:
+          - next
+          - eslint-config-next
+      react:
+        patterns:
+          - react
+          - react-dom
+          - '@types/react'
+          - '@types/react-dom'
+      tailwind:
+        patterns:
+          - tailwindcss
+          - postcss
+          - autoprefixer
+          - tailwindcss-animate
+          - prettier-plugin-tailwindcss
+      radix:
+        patterns:
+          - '@radix-ui/*'
+      converters:
+        patterns:
+          - sharp
+          - heic2any
+          - browser-image-compression
+          - jszip
+      testing:
+        patterns:
+          - vitest
+          - '@vitest/*'
+          - jsdom
+          - '@testing-library/*'
+          - '@playwright/test'
+      tooling:
+        patterns:
+          - typescript
+          - eslint
+          - prettier
+          - husky
+          - lint-staged
+          - tsx
+          - '@commitlint/*'
+
+  # The GitHub Actions used by CI, release and CodeQL.
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: monthly
+      time: '06:00'
+      timezone: Etc/UTC
+    open-pull-requests-limit: 3
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: 'chore(ci)'
+    groups:
+      actions:
+        patterns:
+          - '*'

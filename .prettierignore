@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+build/
+dist/
+coverage/
+playwright-report/
+test-results/
+public/wasm/
+pnpm-lock.yaml
+next-env.d.ts
+public/*.png
+public/*.ico
+tests/fixtures/

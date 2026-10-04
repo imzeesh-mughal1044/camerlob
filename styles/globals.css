@@ -1,0 +1,133 @@
+/*
+ * styles/globals.css
+ * Global stylesheet for Camerlob. Imported once, from app/globals.css.
+ *
+ * Layer order matters: tokens and raw animations load first so that the
+ * Tailwind base layer can reference custom properties, then Tailwind's three
+ * layers, then Camerlob's own base rules and keyframes.
+ */
+
+@import './tokens.css';
+@import './animations.css';
+@import './scrollbar.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border-subtle;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg-primary font-sans text-text-primary antialiased;
+    min-height: 100svh;
+    /* The hero glow is painted behind the whole document. */
+    background-image: var(--gradient-aqua-glow);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-semibold tracking-tight text-text-primary;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background: var(--color-aqua-500);
+    color: var(--color-black-900);
+  }
+
+  /* Honour the OS reduced-motion setting for every animation and transition. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Page container: centred, width-capped, responsive inline padding. */
+  .container-page {
+    @apply mx-auto w-full max-w-container px-4 md:px-6 lg:px-10;
+  }
+
+  /* Primary gradient surface used by the hero and the convert button. */
+  .surface-aqua {
+    background-image: var(--gradient-aqua);
+    color: var(--color-text-on-accent);
+  }
+
+  /* Card surface: elevated, hairline border, hover glow. */
+  .surface-card {
+    @apply rounded-lg border border-border-subtle bg-bg-secondary;
+    box-shadow: var(--shadow-sm);
+    transition:
+      box-shadow var(--transition-base),
+      border-color var(--transition-base),
+      background-image var(--transition-base);
+  }
+
+  .surface-card:hover {
+    background-image: var(--gradient-card-hover);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* Keyboard users get the same affordance as pointer users. */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50;
+    @apply rounded-md bg-aqua-500 px-4 py-2 text-button font-semibold text-text-on-accent;
+  }
+}
+
+@layer utilities {
+  /* 4px-based spacing steps that mirror the token scale. */
+  .p-section {
+    padding-block: var(--space-12);
+  }
+
+  @media (min-width: 1024px) {
+    .p-section {
+      padding-block: var(--space-24);
+    }
+  }
+
+  .gap-grid {
+    gap: var(--grid-gutter);
+  }
+
+  .text-gradient-aqua {
+    background-image: var(--gradient-aqua);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}

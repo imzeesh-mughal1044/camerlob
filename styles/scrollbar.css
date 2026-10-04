@@ -1,0 +1,43 @@
+/*
+ * styles/scrollbar.css
+ * Thin aqua scrollbar for the format grid, file queue and result area.
+ * Falls back to the platform scrollbar where ::-webkit-scrollbar is unsupported.
+ */
+
+@supports selector(::-webkit-scrollbar) {
+  .aqua-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-aqua-700) var(--color-bg-primary);
+  }
+
+  .aqua-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .aqua-scrollbar::-webkit-scrollbar-track {
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-full);
+  }
+
+  .aqua-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--color-aqua-500), var(--color-aqua-700));
+    border-radius: var(--radius-full);
+    border: 2px solid var(--color-bg-primary);
+  }
+
+  .aqua-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--color-aqua-300), var(--color-aqua-500));
+  }
+
+  .aqua-scrollbar::-webkit-scrollbar-corner {
+    background: var(--color-bg-primary);
+  }
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .aqua-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-aqua-700) var(--color-bg-primary);
+  }
+}

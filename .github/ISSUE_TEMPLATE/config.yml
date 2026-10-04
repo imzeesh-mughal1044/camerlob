@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or discussion
+    url: https://github.com/camerlob/camerlob/discussions
+    about: Ask how to use Camerlob, or propose an idea that is not yet a feature request.
+  - name: Security vulnerability
+    url: https://github.com/camerlob/camerlob/security/advisories/new
+    about: Report a vulnerability privately. Do not open a public issue. See SECURITY.md.
+  - name: Product scope
+    url: https://github.com/camerlob/camerlob/blob/main/Documents/PRD.md
+    about: Check the PRD before requesting a feature; some requests are explicit non-goals for v1.

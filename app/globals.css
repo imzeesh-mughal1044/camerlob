@@ -1,0 +1,245 @@
+/*
+ * app/globals.css
+ * The single global stylesheet entry, imported once from app/layout.tsx.
+ *
+ * WHY THIS FILE IS SELF-CONTAINED
+ * ------------------------------------------------------------------------
+ * It would be tidier to `@import '../styles/globals.css'` and add only the
+ * landing page's additions here. That does not work in Next 14: the CSS chain is
+ * postcss-loader -> css-loader, and postcss-import is NOT in it. So Tailwind
+ * never sees the `@tailwind` directives that live in styles/globals.css, and the
+ * build fails with:
+ *
+ *   `@layer base` is used but no matching `@tailwind base` directive is present
+ *
+ * Therefore this file imports only the three leaf partials (which contain no
+ * @layer or @apply), declares the Tailwind directives itself, and then carries
+ * the base rules the landing page depends on. `.container-page` and
+ * `.skip-link` are intentionally repeated from styles/globals.css — the fix
+ * chosen was a documented duplicate over changing the build's CSS pipeline or
+ * editing a file outside this task's scope. When a second route needs the
+ * app-wide sheet, consolidate the two into one file in a follow-up.
+ *
+ * DESIGN DECISIONS
+ * ------------------------------------------------------------------------
+ * 1. FONTS. The brief's Deep Aqua brand forbids Inter, and styles/tokens.css
+ *    still lists it as the first --font-sans fallback, so the three families are
+ *    re-bound here to the next/font variables declared in app/layout.tsx:
+ *      --font-serif -> Instrument Serif (display: hero + one section heading)
+ *      --font-sans  -> Manrope (UI/body)
+ *      --font-mono  -> JetBrains Mono (format tags, step numbers, timestamps)
+ *    Geist is absent from Next 14.2.5's next/font/google manifest, so Manrope is
+ *    used — the brief's own sanctioned fallback. This :root block is later in the
+ *    cascade than the one in styles/tokens.css and so wins at equal specificity.
+ *
+ * 2. THE PAGE IS DARK ONLY in v1. ThemeToggle is wired but unmounted, so
+ *    color-scheme is pinned to dark and the light overrides in tokens.css, which
+ *    live under `.light`, stay dormant.
+ *
+ * 3. REDUCED MOTION HAS TWO HALVES. The block below collapses every CSS
+ *    animation and transition to 0.01ms. The JavaScript animations are handled
+ *    separately by <MotionConfig reducedMotion="user"> in app/page.tsx plus
+ *    explicit useReducedMotion() calls, because a CSS override cannot reach
+ *    framer-motion's inline styles.
+ *
+ * 4. NO HORIZONTAL SCROLL uses overflow-x: clip rather than hidden: clip does not
+ *    create a scroll container, so it cannot break the fixed navbar.
+ */
+
+@import '../styles/tokens.css';
+@import '../styles/animations.css';
+@import '../styles/scrollbar.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+
+    --font-serif: var(--font-instrument-serif), 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+    --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+      sans-serif;
+    --font-mono: var(--font-jetbrains-mono), ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+    --tracking-display: -0.02em;
+    --tracking-label: 0.08em;
+  }
+
+  * {
+    @apply border-border-subtle;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* Anchor targets clear the fixed navbar without any JS offset maths. */
+    scroll-padding-top: 6.5rem;
+    /* Reserve the scrollbar track at all times. Without this the fixed navbar
+       and the /result sticky action bar visibly jump ~15px left the moment a
+       route becomes short enough to lose its scrollbar. */
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    @apply bg-bg-primary font-sans text-text-primary antialiased;
+    min-height: 100svh;
+    /* Safety net for sub-pixel rounding at 360px. `clip`, not `hidden`, so the
+       fixed navbar keeps working. */
+    overflow-x: clip;
+    /* Design decision 6: the film-grain overlay. An inline SVG feTurbulence, tiled
+       at 180x180, `fixed` so it does not scroll with content, at 2.5% via
+       feComponentTransfer-free low-alpha rect.
+
+       It is painted on the BODY BACKGROUND rather than on a fixed overlay because
+       the aurora canvas calls `clearRect` and is therefore transparent: grain on
+       the body shows through the glow, is never re-anchored differently per route,
+       and cannot tint text the way an overlay above the content would. An overlay
+       above the content would also have painted over the in-flow converter and
+       result pages while sitting below the landing page's `relative z-10` sections
+       — the same grain, two different depths, depending on the route. */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='0.025'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply tracking-tight text-text-primary;
+    text-wrap: balance;
+  }
+
+  /* Instrument Serif ships a single 400 weight, so display headings must not
+     ask for 500+ or the browser will synthesise a heavier weight. */
+  h1,
+  h2 {
+    font-weight: 400;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background: var(--color-aqua-500);
+    color: var(--color-black-900);
+  }
+
+  /* Honour the OS reduced-motion setting for every animation and transition. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      /* Delays are collapsed too. Collapsing the duration while leaving a 300ms
+         delay in place would hold an element at its `from` state — the skeletons
+         would sit blank and the loading dots would be invisible for a third of a
+         second before snapping in. Under reduced motion, everything should simply
+         already be there. */
+      animation-delay: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Page container: centred, width-capped, responsive inline padding.
+     Repeated from styles/globals.css — see the file header. */
+  .container-page {
+    @apply mx-auto w-full max-w-container px-4 md:px-6 lg:px-10;
+  }
+
+  /* Keyboard users get the same affordance as pointer users.
+     Repeated from styles/globals.css — see the file header. */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50;
+    @apply rounded-md bg-aqua-500 px-4 py-2 text-button font-semibold text-text-on-accent;
+  }
+
+  /* Hairline rules. `scaleX` rather than `width` so the draw-on animation stays
+     on the compositor; transform-origin is the inline-start edge. */
+  .hairline {
+    @apply block h-px w-full origin-left bg-border-subtle;
+  }
+
+  .hairline-aqua {
+    @apply block h-px w-full origin-left bg-aqua-500;
+  }
+
+  /* Section eyebrow: "01 / SUPPORTED FORMATS". */
+  .label-mono {
+    @apply font-mono text-xs uppercase text-aqua-400;
+    letter-spacing: var(--tracking-label);
+  }
+
+  .label-mono-sm {
+    @apply font-mono text-[11px] uppercase text-aqua-400;
+    letter-spacing: var(--tracking-label);
+  }
+
+  /* The mono trust line under the hero CTAs. */
+  .mono-note {
+    @apply font-mono text-xs text-text-tertiary;
+  }
+
+  /* Section vertical rhythm: 80 / 120 / 160px, per the responsive table.
+     2xl eases back to 128px: at 1920px wide, 160px of padding top and bottom
+     pushes the content measure into visual thin air. */
+  .section-y {
+    padding-block: 5rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-y {
+      padding-block: 7.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .section-y {
+      padding-block: 10rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .section-y {
+      padding-block: 8rem;
+    }
+  }
+}
+
+@layer utilities {
+  /* Wide displays get the 1440px measure; everything else uses --container-xl. */
+  @media (min-width: 1536px) {
+    .measure-wide {
+      max-width: 90rem;
+    }
+  }
+
+  /* Reading measure for body copy, per the typography rules. */
+  .measure-prose {
+    max-width: 32.5rem;
+  }
+
+  .measure-prose-wide {
+    max-width: 48rem;
+  }
+
+  /* Promotes the compositor layer for the hero visual. */
+  .gpu {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+}

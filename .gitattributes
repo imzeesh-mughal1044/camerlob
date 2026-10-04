@@ -1,0 +1,26 @@
+# Normalise line endings for every text file in the repository.
+* text=auto eol=lf
+
+# Shell scripts must always use LF, even on Windows.
+*.sh text eol=lf
+*.ps1 text eol=crlf
+
+# Lockfiles are generated; keep them diffable but stable.
+pnpm-lock.yaml text eol=lf diff=merge
+
+# Binary assets: never line-ending normalised, never diffed as text.
+*.png binary
+*.ico binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.gif binary
+*.wasm binary
+*.woff binary
+*.woff2 binary
+
+# Lock down diffs for generated and vendored paths.
+pnpm-lock.yaml linguist-generated=true
+public/wasm/** linguist-generated=true
+components/ui/** linguist-vendored=true
